@@ -1,46 +1,106 @@
-// alert('Helllo WOrld');
-console.log('Hello World');
+//******First Quick things abt JS as a programming lang*******
 
-//**********variables*********
+/* 1. High Level Lang
+   2. Interpreted lang (no compiler required)
+   3. Multi-Paradigm (OOP, Functional, etc) */ 
 
+
+//**********Variables*********
 //think of variable as a container that stores a value in the memory
-//identifiers are variables name
+//IMP: In actuality the variable points to a memory address, which then holds a value
+//variable names in JavaScript follows camelCase Convention
+
+//identifiers are names of vaiables/classes/funtions
 /* Few Naming Conventions:
 1. Must be Unique name
 2. Can begin with either alphabet,$ or _
 3. Cannot be a JS keyword */
 
 //var, let, const can be used to assign variables in js
-//var is globally scoped hence less preferred as it can cause conflicts
-//let and const were added in ES-6 or ES 2015. They have block scope
+//var is globally scoped (when not written inside a function) hence less preferred as it can cause conflicts
+
+
+//When JavaScript variables are declared, they have an initial value of undefined.
+var myVar; //declaration of variable, myVar is undefined
+
+//If you do a mathematical operation on an undefined variable your result will be NaN which means "Not a Number". 
+myVar = myVar + 4 //NAN(Not A Number)
+
+//If you concatenate a string with an undefined variable, you will get a literal string of "undefined".
+myVar = myVar + "hello" //undefined
+
+
+// let and const were added in ES-6 or ES 2015. They have block scope
 
 let marks=90;
 marks=31;
 console.log(marks);
 //let can be reassigned but const cannot
-//always use const unless you know you are going to reassign. It makes robust code
+//always use const unless you know you are going to reassign. Makes your code robust 
 //for eg a score in game should use let as the value has to be reassigned with time as per condition
 
 
-//*********** data types**********
+//***********Operators in JS************
 
+/* 1. Arithmetic Operator +, -, *, /, **, %, ++, --, %
+NOTE: x ** y produces the same result as Math.pow(x,y)
+NOTE: % IS REMAINDER OPERATOR. IT IS NOT MODULUS OPERATOR (Modulus works differently with negative numbers)
+   2. Assignment Operators =, +=, *=, -=, /=, %=, **=  
+NOTE: FIRST RIGHT SIDE IS CALCULATED COMPLETELY AND THEN ASSIGNED TO THE VARIABLE IN LEFT
+   3. Type Operators typeof, instanceof */  
+var check = "hello";
+console.log(typeof check); //typeof returns the data type
+/* 4. Comparison Operators ==, ===, >, <,  >=, <=, !=, !==, ?
+NOTE: They return a boolean true or false value. 
+NOTE: All comparison operators accept === and !== will perform type conversion while comparing and then evaluate the values. */
+console.log(10 <= '50') //true
+console.log(30 > '5'); //true 
+console.log(3 == '3'); //true
+console.log(3 === '3'); //false 
+//The strict equality operator will compare both the data type and value , without converting one type to the other.
+/* 5. Logical Operators &&, ||, !
+   6. Bitwise Operators &, |, ^, ~, <<, >>, >>>
+NOTE:In Js, a number is stored as a 64-bit floating-point number
+But the bit-wise operation is performed on a 32-bit binary number
+i.e. to perform a bit-operation Js converts the number into a 32-bit binary number (signed) and perform the operation and convert back the result to a 64-bit number. */
+
+//If you add a number and a string, the result will be a string!
+var v = "45" + 9; //NOTE: WE DO NOT GET ANY ERROR HERE
+console.log(v); //459
+var v1 = "Hi" + 5;
+console.log(v1); //Hi5
+
+
+//*********** data types**********
+//JavaScript is dynamically typed language
+//This means data types get determined automatically at run-time 
+//It isn't necessary to declare variable data types
 
 //PRIMITIVE DATA TYPES is a single simple data value with no additional properties and methods
 //String, Numbers, Boolean, null, undefined, symbol
 //They are assigned to memory directly
-//Compared by value(Deep equals comparison ===)
 
-//const isthisvalid=hello; //error, as "" or '' is absent
+//const isthisvalid=hello;  This will give error, as "" or '' is absent
 const myname='megha';//String
 const age=19;//number
 const iscool=true;//boolean, putting this between '' will obvio make it a string
-const score=4.5;//number can be float integer
+const score=4.5;//number, can be float or integer
 const x=null;//object is returned by typeof method but its a bogus value. Actually it should have been null
 const y = undefined;//undefined
 let z; //undefined
 
-//typeof returns the data type
-console.log(typeof myname)
+//************Strings*************
+//Series of zero or more characters enclosed in single or double quotes. 
+//Unlike some other programming languages, single and double quotes work the same in JavaScript.
+
+goodStr = 'Jake asks Amy, "Hey, let\'s go on an adventure?"'; 
+console.log(goodStr);
+//badStr = 'Finn responds, "Let's go!"'; // Throws an error
+// backslash \ can be used as an escape character
+// uses of backslash are: \' \" \t \\ \n \f \b \r
+var myStr= "FirstLine \n\t\\SecondLine \nThirdLine"; 
+console.log(myStr);
+
 
 //concatenation
 console.log("My name is "+myname+" and I am "+age);
@@ -52,6 +112,9 @@ console.log(hello);
 //String Methods and properies
 const s="hello world";
 console.log(s.length); //property does not have paranthesis
+console.log(s[2]); //0 based inexing is followed
+//NOTE: STRING VALUES ARE IMMUTABLE ie individual characters cannot be changed using indexing
+// s[2] = "H" this will give error
 console.log(s.toUpperCase())//method 
 console.log(s.substring(0,5)); //upper bound is exclusive
 console.log(s.substring(0,5).toUpperCase());//chaning of methods
@@ -59,10 +122,11 @@ console.log(s.split(''))
 const s1="shreya, megha, esha, shweta";
 console.log(s1.split(", "))
 
+
 //NON PRIMITIVE or COMPLEX DATA TYPES
 //Objects such as functions and arrays 
 //They are mutable
-//Compared by Reference(Deep equals comparison ===)
+//stored in heap
 
 
 //**************Arrays**********
@@ -79,22 +143,41 @@ console.log(numbers);
 const fruits=['apples', 'oranges', 67, '9.2', true];
 
 console.log(fruits);
-console.log(fruits[1]); //accessing elements note that indexing starts from 0
-fruits[3]='grapes'//changing values of array elements ie arays are mutable
+console.log(fruits[1]); //accessing elements using zero based indexing
+fruits[3]='grapes'// array elements are mutable unlike strings
 /*note that even if array is const type the individual elements can be reassigned its value. But complete fruits array cannot be*/
 console.log(fruits);
 
 //commonly used methods
-fruits.push('mango');//push means to add at end of array
+fruits.push('mango' ,'kiwi');//push means to append
+//NOTE: More than one elements can be appended
 console.log(fruits);
 fruits.unshift('strawberries');//unshift means to add at beginning of array
-fruits.pop();//delete from end
+fruits.pop();//removes the last element from an array and returns that element.
+fruits.shift(); //removes first element and returns it
 console.log(fruits);
 console.log(Array.isArray(fruits));//check if a variable is array or not
 console.log(fruits.indexOf('oranges'));//index of certain value
 
+//Multi-dimensional Arrays or nested arrray are arrays within an array
+const myArray = [["hello", 9], "ghagd",[true, false, 8]];
+console.log(myArray);
+//Accessing Multi-dimensional arrays using Indexes
+var arr = [
+    [1,2,3],
+    [4,5,6],
+    [7,8,9],
+    [[10,11,12], 13, 14]
+  ];
+  console.log(arr[3]); // equals [[10,11,12], 13, 14]
+  console.log(arr[3][0]); // equals [10,11,12]
+  console.log(arr[3][0][1]); // equals 11
+  console.log(arr.push([55,89, 44],11,22));
+
 //********Object Literals **********
 
+//similar to DICTIONARY in Python
+//DIFFERENCE: Python keys are needed to be written as strings (or ints or floats or whatever)
 //person is an object
 const person = {
     firstName:"Megha",
@@ -222,32 +305,43 @@ console.log(todoStatusText);
 const c = '10';
 const d = 4;
 
-//checks only value hence this will be true
 if(c == 10){
-    console.log('c is eual to 10');
+    console.log('c is equal to 10');
 }
 
 
-//if-else if-else statements
+//if-else ladder
 //as soon as one block is executed below condition won't be checked   
 
-if(c === 10 || d>10){ 
-    //OR operator     
+if(c === 10 || d>10){     
     console.log('Either c is 10 or d is less than 10 or both');
 }
-else if(c === 10 && d<10){
-    //AND operator     
+else if(c === 10 && d<10){   
     console.log('c is 10 and d is less than 10');
-
 }
 else if(c === '10'){
-//check both value and data type 
-//this will be true since both string type and value 10 matchess  
     console.log('c is deeply equal to 10');
 }
 else{
     console.log('None of the above conditions satisfied')
 }
+
+//NOTE: SINCE WE ARE USING RETURN IN EACH BLOCK THUS IT WILL PERSORM THE SAME JOB AS AN IF-ELSE LADDER 
+//MEANING, FUNCTION EXECUTION STOPS AFTER RETURNING A VALUE HENCE ONLY ONE OF THESE BLOCKS WILL BE EXECUTED
+//If we would have used console.log instead of return then there would have been a possibility of multiple block getting executed 
+function testGreaterOrEqual(val) {
+    if (val>=20) {
+      return "20 or Over";
+    }
+  
+    if (val>=10) { 
+      return "10 or Over";
+    }
+  
+    return "Less than 10";
+  }
+  
+  console.log(testGreaterOrEqual(10));
 
 //Ternary operator
 //shorthand for if else
@@ -270,13 +364,22 @@ switch(color){
 }
     
 //***************Functions**************
+//Reusable pieces of code
 
-function addNums(num1 = 1, num2 = 5){
+function addNums(num1 = 1, num2 = 5){ //num1 and num2 are PARAMETERS with default values
     return num1 + num2;
 }
+//NOTE: Parameters are variables that act as placeholders for the values that are to be input while calling
+console.log(addNums()); //calling or invoking of function
+console.log(addNums(7,2));  //actual values of parameters are called ARGUMENTS
 
-console.log(addNums());
-console.log(addNums(7,2));  
+
+//******Scope******
+//scope refers to the visibility of variables
+//Variables which are defined outside of a function block have Global scope.
+//Variables which are used without the var keyword are automatically created in the global scope. This can create unintended consequences
+//Variables which are declared within a function, as well as the function parameters have local scope
+//When local and gloabl variable have same name local will take precedence
 
 //************ Arrow Functions(ES-6)********
 //return keyword is not used 
@@ -288,17 +391,50 @@ console.log(subNums(4,1));
 
 //*********OOP*******
 
+//******Constructor Functions and Prototypes*****
  function Profile(firstname, lastname, dob){
     this.firstname = firstname;
     this.lastname = lastname;
-    this.dob = new Date(dob);
-    this.getBirthYear = function(){
-        return this.dob.getFullYear();
-    }
+    this.dob = new Date(dob); //Date object
+
+}
+Profile.prototype.getBirthYear = function(){
+    return this.dob.getFullYear();
+}
+Profile.prototype.getFullName = function(){
+    return `${this.firstname} ${this.lastname}`;
 }
 //instantiate objects
 //multiple objects having the same properties can be instantiated
 const profile1 = new Profile('Megha', 'Dandapat', '6-7-2001');
-const profile1 = new Profile('Sayak', 'Dandapat', '8-12-2008');
+const profile2 = new Profile('Sayak', 'Dandapat', '8-12-2008');
 console.log(profile1);
 console.log(profile2); 
+console.log(profile1.getBirthYear());
+console.log(profile1.getFullName());
+
+
+//Doing the same thing as above using Es-6 Classes
+//note that since class name is an identifer we have to change it to something else from Profile
+class ProfileClass{
+    constructor(firstname, lastname, dob){
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.dob = new Date(dob); //Date object
+    
+    }
+    getBirthYear(){
+        return this.dob.getFullYear();
+    }
+    getFullName = function(){
+        return `${this.firstname} ${this.lastname}`;
+    }
+    }
+    const profile3 = new ProfileClass('Megha', 'Dandapat', '6-7-2001');
+    const profile4 = new ProfileClass('Sayak', 'Dandapat', '8-12-2008');
+    console.log(profile3);
+    console.log(profile4); 
+    console.log(profile3.getBirthYear());
+    console.log(profile3.getFullName());
+
+    
