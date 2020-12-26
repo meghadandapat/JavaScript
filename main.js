@@ -1,5 +1,3 @@
-//******First Quick things abt JS as a programming lang*******
-
 /* 1. High Level Lang
    2. Interpreted lang (no compiler required)
    3. Multi-Paradigm (OOP, Functional, etc) */ 
@@ -10,25 +8,23 @@
 //IMP: In actuality the variable points to a memory address, which then holds a value
 //variable names in JavaScript follows camelCase Convention
 
-//identifiers are names of vaiables/classes/funtions
+//identifiers are names of variables/classes/funtions
 /* Few Naming Conventions:
-1. Must be Unique name
+1. Must be Unique 
 2. Can begin with either alphabet,$ or _
 3. Cannot be a JS keyword */
 
 //var, let, const can be used to assign variables in js
 //var is globally scoped (when not written inside a function) hence less preferred as it can cause conflicts
 
-
 //When JavaScript variables are declared, they have an initial value of undefined.
 var myVar; //declaration of variable, myVar is undefined
 
-//If you do a mathematical operation on an undefined variable your result will be NaN which means "Not a Number". 
+//Mathematical operation on an undefined variable will give result as NaN 
 myVar = myVar + 4 //NAN(Not A Number)
 
-//If you concatenate a string with an undefined variable, you will get a literal string of "undefined".
+//Concatenating a string with an undefined variable, will result in a literal string of "undefined".
 myVar = myVar + "hello" //undefined
-
 
 // let and const were added in ES-6 or ES 2015. They have block scope
 
@@ -71,7 +67,7 @@ var v1 = "Hi" + 5;
 console.log(v1); //Hi5
 
 
-//*********** data types**********
+//*********** Data Types**********
 //JavaScript is dynamically typed language
 //This means data types get determined automatically at run-time 
 //It isn't necessary to declare variable data types
@@ -83,9 +79,10 @@ console.log(v1); //Hi5
 //const isthisvalid=hello;  This will give error, as "" or '' is absent
 const myname='megha';//String
 const age=19;//number
-const iscool=true;//boolean, putting this between '' will obvio make it a string
-const score=4.5;//number, can be float or integer
-const x=null;//object is returned by typeof method but its a bogus value. Actually it should have been null
+const sgpa=9.1;//number
+//Note: In js there is no long int float etc. All are number
+const iscool=true;//boolean, putting true between '' will obvio make it a string
+const x=null;//object is returned by typeof method but its a bogus value. Actually it should be null
 const y = undefined;//undefined
 let z; //undefined
 
@@ -114,7 +111,7 @@ const s="hello world";
 console.log(s.length); //property does not have paranthesis
 console.log(s[2]); //0 based inexing is followed
 //NOTE: STRING VALUES ARE IMMUTABLE ie individual characters cannot be changed using indexing
-// s[2] = "H" this will give error
+// s[2] = "H" will throw error
 console.log(s.toUpperCase())//method 
 console.log(s.substring(0,5)); //upper bound is exclusive
 console.log(s.substring(0,5).toUpperCase());//chaning of methods
@@ -128,8 +125,7 @@ console.log(s1.split(", "))
 //They are mutable
 //stored in heap
 
-
-//**************Arrays**********
+//**************Arrays************
 //Arrays are variables that hold multiple values
 //supports multiple datatypes within same array
 //JS is not statically typed but TS is
@@ -148,7 +144,7 @@ fruits[3]='grapes'// array elements are mutable unlike strings
 /*note that even if array is const type the individual elements can be reassigned its value. But complete fruits array cannot be*/
 console.log(fruits);
 
-//commonly used methods
+//******commonly used Array methods******
 fruits.push('mango' ,'kiwi');//push means to append
 //NOTE: More than one elements can be appended
 console.log(fruits);
@@ -177,7 +173,10 @@ var arr = [
 //********Object Literals **********
 
 //similar to DICTIONARY in Python
+//key value pair in python
+//here, properties and data
 //DIFFERENCE: Python keys are needed to be written as strings (or ints or floats or whatever)
+//here the keys can be non-string as well. js will automatically typecast as strings
 //person is an object
 const person = {
     firstName:"Megha",
@@ -190,13 +189,25 @@ const person = {
         district:"pune",
         state:"MH"
     }    
-}
+};
 console.log(person);
-console.log(person.firstName, person.lastName)
-console.log(person.hobbies[2]) 
+
+//***********Accessing property of object using dot operator**********
+//only possible when property name of an object is a single word with no space
+//Syntax: objectName.property
+console.log(person.firstName, person.lastName) ;
+console.log(person.hobbies[2]);
 console.log(person.address.state);
 
-//destructuring(ES-6)
+//adding properties or modifying existing properties(if already exits)
+person.email ='megha13dandapat@gmail.com';
+console.log(person);
+
+//deleting properties
+delete person.firstName;
+console.log(person);
+
+//**********destructuring(ES-6)*********
 /* expression that makes it possible to unpack values from arrays, or properties from objects, into distinct variables*/
 //firstName becomes a variable here
 const {firstName, lastName} = person;
@@ -205,11 +216,168 @@ console.log(firstName)
 const {address: {city}}=person;
 console.log(city);
 
-//adding properties 
-person.email='megha13dandapat@gmail.com'
-console.log(person)
+//**********Access property of object using bracket notation*************
+//can be used when property name has space as well as when it doesn't
+//Used when property name is stored in a variable. 
+//Also, used when name is created dynamically during execution For eg. Function can return the property name which can be stored in variable
+//Syntax: objectName["property"]
+//Syntax: objectName[variable]         
+var myObj = {
+    "Space Name": "Hello",
+    "More Space": "I am",
+    "NoSpace": "Megha"
+  };
+  var secondProperty = "More Space";
+  console.log(myObj["Space Name"]); // Hello
+  console.log(myObj[secondProperty]); // I am
+  console.log(myObj["NoSpace"]);    // Megha
+// NOTE: property names with spaces in them MUST be in quotes (single or double).
 
-//arrays of objects
+myObj["Space Name"] = "Hyy";  //Modifying using []
+delete myObj["NoSpace"];    //deleteing using []
+console.log(myObj);
+console.log(myObj.hasOwnProperty("NoSpace")); //checking if property is present, returns boolean value
+
+ 
+//**********Functions*********
+//Reusable pieces of code
+
+function addNums(num1 = 1, num2 = 5){ //num1 and num2 are PARAMETERS with default values
+    return num1 + num2;
+}
+//NOTE: Parameters are variables that act as placeholders for the values that are to be input while calling
+console.log(addNums()); //calling or invoking of function
+console.log(addNums(7,2));  //actual values of parameters are called ARGUMENTS
+
+
+//******Scope******
+//scope refers to the visibility of variables
+//Variables which are defined outside of a function block have Global scope.
+//Variables which are used without the var keyword are automatically created in the global scope. This can create unintended consequences
+//Variables which are declared within a function, as well as the function parameters have local scope
+//When local and gloabl variable have same name local will take precedence
+
+//************ Arrow Functions(ES-6)********
+//return keyword is not used 
+//incase of single parameter no paranthesis is needed
+//incase function body has a single statement { } is not reqired  
+const subNums = (num1 = 1, num2 = 5) => num1-num2;
+console.log(subNums(4,1));
+
+//*********Conditionals*********
+
+//if statement
+const c = '10';
+const d = 4;
+
+if(c == 10){
+    console.log('c is equal to 10');
+}
+
+//if-else ladder
+//as soon as one block is executed below condition won't be checked   
+
+if(c === 10 || d>10){     
+    console.log('Either c is 10 or d is less than 10 or both');
+}
+else if(c === 10 && d<10){   
+    console.log('c is 10 and d is less than 10');
+}
+else if(c === '10'){
+    console.log('c is deeply equal to 10');
+}
+else{
+    console.log('None of the above conditions satisfied')
+}
+
+//NOTE: SINCE WE ARE USING RETURN IN EACH BLOCK THUS IT WILL GIVE SAME OUTPUT AS AN IF-ELSE LADDER 
+//MEANING, FUNCTION EXECUTION STOPS AFTER RETURNING A VALUE HENCE ONLY ONE OF THESE BLOCKS WILL BE EXECUTED
+//If we would have used console.log instead of return then there would have been a possibility of multiple block getting executed 
+function testGreaterOrEqual(val) {
+    if (val>=20) {
+      return "20 or Over";
+    }
+  
+    if (val>=10) { 
+      return "10 or Over";
+    }
+  
+    return "Less than 10";
+  }
+  
+  console.log(testGreaterOrEqual(10));
+
+//Ternary operator
+//shorthand for if else
+// ? corresponds to if and : corresponds to else
+const p = 10;
+const color = p>10 ? 'red' //if
+    : 'blue'; //else
+console.log(color); //blue
+
+//Multiple Ternary operators
+//alternative for elseif ladder
+function findGreaterOrEqual(a, b) {
+    return (a === b) ? "a and b are equal"  //if
+      : (a > b) ? "a is greater" // else if
+      : "b is greater"; // else
+  }
+console.log(findGreaterOrEqual(8, 4));
+
+//Switch case
+//use switch when you have MANY option to choose from
+//Cases are compared using === operator
+switch(color){
+    case 'red':
+        console.log('Color is red');
+        break;
+    case 'blue':
+        console.log('color is blue');
+        break;
+    default:
+        console.log('neither blue nor red');
+        break;
+}
+val = 3;
+//multiple input single output
+switch(val) {
+  case 1:
+  case 2:
+  case 3:
+   console.log( "1, 2, or 3");
+    break;
+  case 4:
+    console.log( "4 alone");
+}
+
+//*************LOOPS*************
+
+//For Loop
+//step1: initialize i
+//step2: check condition and execute
+//step3: increment i
+//step4: go to step 2
+for(let i=0; i<10; i++){
+    console.log(`I am ${i} using FOR`); // 1 to 9
+} 
+
+//While Loop
+let varWhile=0;
+while(varWhile<10){
+    console.log(`I am ${varWhile} using WHILE`);
+    varWhile++;
+}
+
+//do-while
+//will execute at least once irrespetive of condition
+var ourArray = [];
+var i = 0;
+do {
+  ourArray.push(i);
+  i++;
+} while (i < 5)
+
+//********Arrays of Objects**********
 const todos=[
     {
         id:1,
@@ -236,24 +404,6 @@ const todosJSON = JSON.stringify(todos);
 console.log(todosJSON); 
 
 
-//*************LOOPS*************
-
-//For Loop
-//step1: initialize i
-//step2: check condition and execute
-//step3: increment i
-//step4: go to step 2
-for(let i=0; i<10; i++){
-    console.log(`I am ${i} using FOR`); // 1 to 9
-} 
-
-//While Loop
-let i=0;
-while(i<10){
-console.log(`I am ${i} using WHILE`);
-i++;
-}
-
 //****************Looping through Arrays*****************
 
 //using FOR LOOP
@@ -271,7 +421,15 @@ for(let mytodo of todos){
 for(let mystatus of todos){
     console.log(mystatus.status);
 }
-
+//looping throgh multi-dimensional array
+var arr = [
+    [1,2], [3,4], [5,9,6]
+  ];
+  for (var i=0; i < arr.length; i++) {
+    for (var j=0; j < arr[i].length; j++) {
+      console.log(arr[i][j]);
+    }
+  } 
 //High Order Array Methods- preferred way for iterations
 
 //forEach
@@ -300,93 +458,6 @@ const todoText= todos.map(function(mytodo){
     return mytodo.text;
 });
 console.log(todoStatusText);
-
-//************Conditionals*************
-const c = '10';
-const d = 4;
-
-if(c == 10){
-    console.log('c is equal to 10');
-}
-
-
-//if-else ladder
-//as soon as one block is executed below condition won't be checked   
-
-if(c === 10 || d>10){     
-    console.log('Either c is 10 or d is less than 10 or both');
-}
-else if(c === 10 && d<10){   
-    console.log('c is 10 and d is less than 10');
-}
-else if(c === '10'){
-    console.log('c is deeply equal to 10');
-}
-else{
-    console.log('None of the above conditions satisfied')
-}
-
-//NOTE: SINCE WE ARE USING RETURN IN EACH BLOCK THUS IT WILL PERSORM THE SAME JOB AS AN IF-ELSE LADDER 
-//MEANING, FUNCTION EXECUTION STOPS AFTER RETURNING A VALUE HENCE ONLY ONE OF THESE BLOCKS WILL BE EXECUTED
-//If we would have used console.log instead of return then there would have been a possibility of multiple block getting executed 
-function testGreaterOrEqual(val) {
-    if (val>=20) {
-      return "20 or Over";
-    }
-  
-    if (val>=10) { 
-      return "10 or Over";
-    }
-  
-    return "Less than 10";
-  }
-  
-  console.log(testGreaterOrEqual(10));
-
-//Ternary operator
-//shorthand for if else
-// ? corresponds to if and : corresponds to else
-const p = 10;
-const color = p>10 ? 'red' : 'blue';
-console.log(color);
-
-//switch case
-switch(color){
-    case 'red':
-        console.log('Color is red');
-        break;
-    case 'blue':
-        console.log('color is blue');
-        break;
-    default:
-        console.log('neither blue nor red');
-        break;
-}
-    
-//***************Functions**************
-//Reusable pieces of code
-
-function addNums(num1 = 1, num2 = 5){ //num1 and num2 are PARAMETERS with default values
-    return num1 + num2;
-}
-//NOTE: Parameters are variables that act as placeholders for the values that are to be input while calling
-console.log(addNums()); //calling or invoking of function
-console.log(addNums(7,2));  //actual values of parameters are called ARGUMENTS
-
-
-//******Scope******
-//scope refers to the visibility of variables
-//Variables which are defined outside of a function block have Global scope.
-//Variables which are used without the var keyword are automatically created in the global scope. This can create unintended consequences
-//Variables which are declared within a function, as well as the function parameters have local scope
-//When local and gloabl variable have same name local will take precedence
-
-//************ Arrow Functions(ES-6)********
-//return keyword is not used 
-//incase of single parameter no paranthesis is needed
-//incase function body has a single statement { } is not reqired  
-const subNums = (num1 = 1, num2 = 5) => num1-num2;
-console.log(subNums(4,1));
 
 
 //*********OOP*******
