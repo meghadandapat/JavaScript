@@ -1,8 +1,9 @@
-//*************Document Object Model*********
+//**********Document Object Model*********
 /* 1. Tree of nodes/elements created by browser
    2. Js can be used to manupulate to the DOM
    3. Object Oriented Reperesentation */
-
+   console.log(window); //window object is parent object of the browser
+    
    console.dir(document); 
    console.log(document.domain);
    console.log(document.url);
@@ -59,6 +60,7 @@ for(var i = 0; i< listTags.length; i++){
 }
 
 //QUERYSELECTOR
+//mostly-used
 //selectors works identical to css
 var header = document.querySelector('#header-title');
 header.style.color = 'black';
@@ -83,4 +85,12 @@ var titles = document.querySelectorAll('.title'); //returns NodeList
 console.log(titles);
 console.log(titles[0]);
 titles[0].textContent = 'Hey There';
+
+//looping using ForEach
+var listitems = document.querySelectorAll('.list-group-item');
+listitems.forEach((item) => console.log(item));
+
+var title = document.querySelector('#items');
+console.log(title);
+title.children[1].innerHTML ='<h3>Second item</h3>';
 

@@ -48,7 +48,7 @@ var check = "hello";
 console.log(typeof check); //typeof returns the data type
 /* 4. Comparison Operators ==, ===, >, <,  >=, <=, !=, !==, ?
 NOTE: They return a boolean true or false value. 
-NOTE: All comparison operators accept === and !== will perform type conversion while comparing and then evaluate the values. */
+NOTE: All comparison operators except === and !== will perform type conversion while comparing and then evaluate the values. */
 console.log(10 <= '50') //true
 console.log(30 > '5'); //true 
 console.log(3 == '3'); //true
@@ -67,12 +67,12 @@ var v1 = "Hi" + 5;
 console.log(v1); //Hi5
 
 
-//*********** Data Types**********
+//***********Data Types**********
 //JavaScript is dynamically typed language
 //This means data types get determined automatically at run-time 
 //It isn't necessary to declare variable data types
 
-//PRIMITIVE DATA TYPES is a single simple data value with no additional properties and methods
+//PRIMITIVE DATA TYPES 
 //String, Numbers, Boolean, null, undefined, symbol
 //They are assigned to memory directly
 
@@ -175,8 +175,8 @@ var arr = [
 //similar to DICTIONARY in Python
 //key value pair in python
 //here, properties and data
-//DIFFERENCE: Python keys are needed to be written as strings (or ints or floats or whatever)
-//here the keys can be non-string as well. js will automatically typecast as strings
+//DIFFERENCE: Python keys has to be of some specific immutable data type(int,string,tuple etc)
+//here the keys can be non-string as well(without any " "). Js will automatically typecast as strings
 //person is an object
 const person = {
     firstName:"Megha",
