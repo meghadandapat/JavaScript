@@ -64,6 +64,7 @@ allRetails.forEach(myname => console.log(myname.name));
 
 
 //Map Returns an new array
+//works like foreach but the elements will be returned in array
 
 // return an array of the values stored in category prperty of each object
 
