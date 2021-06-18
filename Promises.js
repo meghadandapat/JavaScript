@@ -16,6 +16,11 @@ const getDummyData = (resource) => {
   });
 };
 
+
+//promises are objects that return a value which you hope to receive in the future
+//Anology: receipt is a promise by the restaurant that you will receive your order
+//pass a callback function inside Promise
+
 getDummyData("dummyapis/names.json")
   .then((data) => {
     console.log("First promise resolved", data);
